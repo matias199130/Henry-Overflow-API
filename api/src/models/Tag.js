@@ -4,9 +4,10 @@ module.exports = (sequelize) => {
     // defino el modelo
     sequelize.define('tag', {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        unique: true
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
@@ -15,5 +16,6 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: false
-    });
-  };
+    }
+  );
+};
