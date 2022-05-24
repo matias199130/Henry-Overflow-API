@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
       },
       rating: {
         type: DataTypes.STRING,
-        unique: true
+        defaultValue: 0
       }
     },
     {
