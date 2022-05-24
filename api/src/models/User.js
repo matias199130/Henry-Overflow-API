@@ -11,52 +11,52 @@ module.exports = (sequelize) => {
             primaryKey: true,
             allowNull: false,
         },
-        First_name: {
+        first_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        Last_name: {
+        last_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        Email: {
+        email: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        Password: {
+        password: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        Rating: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        Badges: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        description: {
-            type: DataTypes.TEXT,
-        },
-        released: {
-            type: DataTypes.DATEONLY,
-            allowNull: true,
         },
         rating: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: true,
+        },
+        badges: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+        },
+        isAdmin: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+        },
+        role: {
+            type: DataTypes.ENUM('Student', 'Henry Hero', 'Technical Assitance', 'Henry Mentor', 'Instructor', 'Staff Henry', 'Graduate'),
             allowNull: true,
+        },
+        twitter: {
+            type: DataTypes.TEXT,
+        },
+        github: {
+            type: DataTypes.TEXT,
+        },
+        portfolio: {
+            type: DataTypes.TEXT,
         },
         image: {
             type: DataTypes.TEXT,
         },
-        platforms: {
-            type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false,
-        },
-        createdVideoGame: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true,
-            defaultValue: true,
-        }
     });
 };
