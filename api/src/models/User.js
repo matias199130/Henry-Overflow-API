@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
         rating: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: true,
+            defaultValue: 0,
         },
         badges: {
             type: DataTypes.BOOLEAN,
