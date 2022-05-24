@@ -2,17 +2,13 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     // defino el modelo
-    sequelize.define('comment', {
+    sequelize.define('tag', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         unique: true
       },
-      message: {
-        type: DataTypes.STRING,
-        unique: true
-      },
-      rating: {
+      name: {
         type: DataTypes.STRING,
         unique: true
       }
