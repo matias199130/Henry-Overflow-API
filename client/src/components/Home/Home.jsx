@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -14,6 +13,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { Questions } from '../Questions/Questions';
+import SearchBar from '../SearchBar/SearchBar';
+import Button from '@mui/material/Button'
 
 const drawerWidth = 240;
 
@@ -24,12 +25,11 @@ export default function Home() {
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, backgroundColor:'orange' }}
+        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, /* backgroundColor:'orange' */ }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Hacer una Pregunta
-          </Typography>
+          <Button sx = {{ color: '#A8A3B5'  }}> Hacer una Pregunta </Button>
+          <SearchBar />
         </Toolbar>
       </AppBar>
       <Drawer
