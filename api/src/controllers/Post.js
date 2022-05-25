@@ -3,7 +3,7 @@ const { Post, Tag, User, Comment} = require('../db');
 
 const getPost = (req, res, next) => {
     const id = req.params.id;
-    const name = req.query.name;
+    const title = req.query.title;
 
          Post.findAll({
             include: [
@@ -24,7 +24,16 @@ const getPost = (req, res, next) => {
                 
                 }       
             ]
-        }).then(post => res.send(post))
+        }).then(post => {
+            if(id){
+                let postId = post.filter(el => el.id == id);
+                postId.length ? res.status(200).send(postId) : res.status(400).send("question not found")
+            } 
+            if(title){
+                let postTitle = post.filter(el => el.title.toLowerCase().includes(title.toLowerCase()))
+                postTitle.length ? res.send(postTitle) : res.status(400).send("question not found")
+            }
+           return  res.send(post)})
         .catch(error => next(error))
     
 }
