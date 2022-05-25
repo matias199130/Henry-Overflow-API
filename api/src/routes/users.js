@@ -1,24 +1,13 @@
 require('dotenv').config();
 const { Router } = require('express');
+const { getUser, postUser, updateUser, deleteUser } = require('../controllers/Users');
 const router = Router();
-const { User } = require('../db')
 
-router.get('/', async(req, res, next) => {
-    try {
-        const response = await User.findAll()
-        res.json(response)
-    } catch (error) {
-        next(error)
-    }
-});
 
-router.post('/', async(req, res, next) => {
-    try {
-        const newUser = await User.create(req.body);
-        res.json(newUser)
-    } catch (error) {
-        next(error)
-    }
-});
+router.get('/', getUser);
+router.get('/:id',getUser)
+router.post('/', postUser );
+router.put('/:id', updateUser);
+router.delete('/:id', deleteUser)
 
 module.exports = router
