@@ -63,7 +63,7 @@ const { Post, Tag, User } = sequelize.models;
 Post.belongsToMany(Tag, { through: "posts_tags" });
 Tag.belongsToMany(Post, { through: "posts_tags" });
 
-User.hasOne()
+// User.hasOne()
 
 module.exports = {
     ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
