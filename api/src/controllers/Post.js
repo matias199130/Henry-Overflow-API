@@ -2,30 +2,27 @@
 const { Post, Tag, User, Comment} = require('../db');
 
 const getPost = (req, res, next) => {
+    const id = req.params.id;
+    const name = req.query.name;
+
          Post.findAll({
             include: [
                 {
                 model: Tag,
-                attributes: ["name"],
+                attributes: ["name", "id"],
                 through: {
                     attributes: []
+                }
                 },
+                {
+                model: Comment,
+                attributes: ["message"],
                 },
-                // {
-                // model: Comment,
-                // attributes: ["message"],
-                // through: {
-                //     attributes: []
-                // },
-                // include: {                    
-                // model: User,
-                // attributes: ["first_name", "last_name"],
-                // through: {
-                //     attributes: []
-                // },
+                {                    
+                model: User,
+                attributes: ["first_name", "last_name", "id"],               
                 
-                // }
-                // }       
+                }       
             ]
         }).then(post => res.send(post))
         .catch(error => next(error))
@@ -34,6 +31,7 @@ const getPost = (req, res, next) => {
 
 const addPost = async (req, res, next) => {
     try {
+        const  {commentId, userId} = req.params;
         const {title, message, rating, tag} = req.body;
         const postCreated = await Post.create({
         title, message, rating
@@ -43,6 +41,9 @@ const addPost = async (req, res, next) => {
                 name : tag
             }
         })
+        const comment = await Comment.findByPk(commentId);
+        comment.addUser(userId)
+
    postCreated.addTag(tags);
     res.send("Post done successfully")
     } catch (error) {
@@ -55,8 +56,8 @@ const updatePost = (req, res, next) => {
     const {title, message, rating, tag} = req.body;
     return Post.update(
         {title, message, rating, tag},{
-            where: id,
-        }
+            where: {id},  raw : true 
+        },
     ).then(updatedPost => res.send(updatedPost))
     .catch(error => next(error))
 }
