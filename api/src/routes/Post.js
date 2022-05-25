@@ -6,7 +6,7 @@ const { addPost, getPost, deletePost, updatePost } = require('../controllers/Pos
 
 router.get('/', getPost);
 //router.get('/:id', allPokemon)
-router.post('/', addPost)
+router.post('/:idUser', addPost)
 router.put('/:id', updatePost)
 router.delete('/:id', deletePost)
 

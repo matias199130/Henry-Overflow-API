@@ -31,7 +31,9 @@ const getPost = (req, res, next) => {
 
 const addPost = async (req, res, next) => {
     try {
-        const  {commentId, userId} = req.params;
+        const { idUser } = req.params;
+        const createdBy = await User.findByPk(idUser);
+
         const {title, message, rating, tag} = req.body;
         const postCreated = await Post.create({
         title, message, rating
@@ -41,11 +43,9 @@ const addPost = async (req, res, next) => {
                 name : tag
             }
         })
-        const comment = await Comment.findByPk(commentId);
-        comment.addUser(userId)
-
-   postCreated.addTag(tags);
-    res.send("Post done successfully")
+        postCreated.addTag(tags);
+        createdBy.addPost(postCreated)
+        res.send("Post done successfully")
     } catch (error) {
         next(error)
     }
