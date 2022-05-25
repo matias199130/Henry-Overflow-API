@@ -4,6 +4,7 @@ const { Router } = require('express');
 
 const postRouter = require('./Post')
 const users = require('./users')
+const comments = require('./comments')
 
 const router = Router();
 
