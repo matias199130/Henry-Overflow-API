@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { Router } = require('express');
+const { updateComment, deleteComment } = require('../controllers/Comment');
 const router = Router();
 const { Comment, Post, User } = require('../db')
 
@@ -7,8 +8,8 @@ const { Comment, Post, User } = require('../db')
 // Otro usuario envia una respuesta para la misma, que se relaciona con:
 // ID POST ---> SABER A QUE POST PERTENECE
 // ID USER ---> SABER QUE USUARIO HIZO ESE COMENTARIO
-
-
+router.put('/:id',updateComment );
+router.delete('/:id', deleteComment);
 /* 
 Entonces extraigo el ID del post por params, y de alli saco el
 post del que pertenece y desde el post al que pertenece tambien saco el usuario
