@@ -8,9 +8,9 @@ const getComment = (req, res, next) => {
                 {
                 model: Post,
                 attributes: ["title", "id"],
-                through: {
-                    attributes: []
-                }
+                // through: {
+                //     attributes: []
+                // }
                 },                
                 {                    
                 model: User,
@@ -52,5 +52,6 @@ const deleteComment = (req, res, next) => {
 
 module.exports = {
     updateComment,
-    deleteComment
+    deleteComment,
+    getComment
 }
