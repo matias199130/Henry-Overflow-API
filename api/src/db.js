@@ -60,7 +60,8 @@ const {
     Post,
     Tag,
     User,
-    Comment
+    Comment,
+    Module
 } = sequelize.models;
 
 // Aca vendrian las relaciones
@@ -76,6 +77,9 @@ Comment.belongsTo(Post);
 
 User.hasMany(Comment);
 Comment.belongsTo(User);
+
+Module.hasMany(Tag);
+Tag.belongsTo(Module);
 
 
 
