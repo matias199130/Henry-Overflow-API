@@ -48,15 +48,20 @@ module.exports = (sequelize) => {
         },
         twitter: {
             type: DataTypes.TEXT,
+            allowNull: true,
         },
         github: {
             type: DataTypes.TEXT,
+            allowNull: true,
         },
         portfolio: {
             type: DataTypes.TEXT,
+            allowNull: true,
         },
         image: {
             type: DataTypes.TEXT,
+            allowNull: true,
         },
+        
     });
 };

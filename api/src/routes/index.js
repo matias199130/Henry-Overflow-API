@@ -14,7 +14,12 @@ const router = Router();
 
 router.use('/post', postRouter)
 router.use('/users', users)
+
 router.use('./modules', modules)
+
+router.use('/comments', comments)
+ 
+
 
 router.use('/', (req, res) => {
     res.status(200).send({message: "Ruta principal conectada exitosamente"})
