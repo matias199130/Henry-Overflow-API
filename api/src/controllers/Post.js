@@ -2,7 +2,7 @@
 const { Post, Tag, User, Comment} = require('../db');
 
 const getPost = (req, res, next) => {
-    const id = req.params.id;
+    const { idPost } = req.params;
     const title = req.query.title;
 
          Post.findAll({
@@ -25,8 +25,8 @@ const getPost = (req, res, next) => {
                 }       
             ]
         }).then(post => {
-            if(id){
-                let postId = post.filter(el => el.id == id);
+            if(idPost){
+                let postId = post.filter(el => el.id == idPost);
                 postId.length ? res.status(200).send(postId) : res.status(400).send("question not found")
             } 
             if(title){
@@ -61,21 +61,21 @@ const addPost = async (req, res, next) => {
 }
 
 const updatePost = (req, res, next) => {
-    const id = req.params.id;
+    const { idPost } = req.params;
     const {title, message, rating, tag} = req.body;
     return Post.update(
         {title, message, rating, tag},{
-            where: {id},  raw : true 
+            where: {id: idPost},  raw : true 
         },
     ).then(updatedPost => res.send(updatedPost))
     .catch(error => next(error))
 }
 
 const deletePost = (req, res, next) => {
-    const id = req. params.id;
+    const { idPost } = req. params;
     return Post.destroy({
         where: {
-            id
+            id: idPost
         }
     }).then(() => {res.status(200).send("post deleted successfully")})
     .catch(error => next(error))

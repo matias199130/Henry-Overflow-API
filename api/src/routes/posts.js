@@ -5,10 +5,10 @@ const { addPost, getPost, deletePost, updatePost } = require('../controllers/Pos
  
 
 router.get('/', getPost);
-router.get('/:id', getPost)
+router.get('/:idPost', getPost)
 router.post('/:idUser', addPost)
-router.put('/:id', updatePost)
-router.delete('/:id', deletePost)
+router.put('/:idPost', updatePost)
+router.delete('/:idPost', deletePost)
 
 
 module.exports = router
