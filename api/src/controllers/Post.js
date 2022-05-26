@@ -16,22 +16,23 @@ const getPost = (req, res, next) => {
                 },
                 {
                 model: Comment,
-                attributes: ["message"],
+                include: [{model: User, attributes: ["first_name", "last_name", "id"] }],
+                attributes: {exclude: ["userId", "postId"]}
                 },
                 {                    
                 model: User,
                 attributes: ["first_name", "last_name", "id"],               
-                
-                }       
-            ]
+                },
+            ],
+            attributes: {exclude: ["userId"]}
         }).then(post => {
             if(idPost){
                 let postId = post.filter(el => el.id == idPost);
-                postId.length ? res.status(200).send(postId) : res.status(400).send("question not found")
+                return postId.length ? res.status(200).send(postId) : res.status(400).send("question not found")
             } 
             if(title){
                 let postTitle = post.filter(el => el.title.toLowerCase().includes(title.toLowerCase()))
-                postTitle.length ? res.send(postTitle) : res.status(400).send("question not found")
+                return postTitle.length ? res.send(postTitle) : res.status(400).send("question not found")
             }
            return  res.send(post)})
         .catch(error => next(error))
@@ -54,7 +55,7 @@ const addPost = async (req, res, next) => {
         })
         postCreated.addTag(tags);
         createdBy.addPost(postCreated)
-        res.send("Post done successfully")
+        return res.send("Post done successfully")
     } catch (error) {
         next(error)
     }
@@ -77,7 +78,7 @@ const deletePost = (req, res, next) => {
         where: {
             id: idPost
         }
-    }).then(() => {res.status(200).send("post deleted successfully")})
+    }).then(() => res.status(200).send("post deleted successfully"))
     .catch(error => next(error))
 }
 
