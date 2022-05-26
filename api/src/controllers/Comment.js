@@ -47,7 +47,7 @@ const addComment = async(req, res, next) => {
 const updateComment = (req, res, next) => {
     const id = req.params.id;
     const {message, rating} = req.body;
-    return Post.update(
+    return Comment.update(
         {message, rating},{
             where: {id},  raw : true 
         },
