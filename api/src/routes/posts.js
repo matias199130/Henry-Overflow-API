@@ -5,8 +5,8 @@ const { addPost, getPost, deletePost, updatePost } = require('../controllers/Pos
  
 
 router.get('/', getPost);
-router.get('/:idPost', getPost)
 router.post('/:idUser', addPost)
+router.get('/:idPost', getPost)
 router.put('/:idPost', updatePost)
 router.delete('/:idPost', deletePost)
 
