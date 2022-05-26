@@ -51,7 +51,7 @@ const updateComment = (req, res, next) => {
         {message, rating},{
             where: {id: idComment},  raw : true 
         },
-    ).then(updatedComment => res.send(updatedComment))
+    ).then(r => r[0] === 1? res.send("Comentario Actualizado con exito!") : res.status(404).send("No se pudo actualizar el comentario"))
     .catch(error => next(error))
 }
 
@@ -61,7 +61,7 @@ const deleteComment = (req, res, next) => {
         where: {
             id: idComment
         }
-    }).then(() => {res.status(200).send("Comment deleted successfully")})
+    }).then(() => res.status(200).send("Comment deleted successfully"))
     .catch(error => next(error))
 }
 

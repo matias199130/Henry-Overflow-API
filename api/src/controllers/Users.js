@@ -1,15 +1,25 @@
-const { User } = require('../db');
+const { User, Post, Comment } = require('../db');
 
 const getUser = async(req, res, next) => {
     const { idUser } = req.params;
     const {first_name, last_name} = req.query;
    
     try {
-        const response = await User.findAll()
         if(idUser){
-            let userId = response.filter(el => el.id == idUser);
-            userId.length ? res.status(200).send(userId) : res.status(400).send("user not found")
+            const userDetail = await User.findByPk(idUser, {include: [
+                {
+                    model: Post,
+                    attributes: {exclude: ["userId"]}
+                }, 
+                {
+                    model: Comment,
+                    attributes: {exclude: ["userId"]}
+                }, 
+                
+            ]});
+            return userDetail ? res.status(200).send(userDetail) : res.status(400).send("user not found")
         } 
+        const response = await User.findAll()
         // if(first_name && last_name){
         //     let userName = response.filter(el => el.first_name.toLowerCase().includes(first_name.toLowerCase()));
         //     let userLastName = response.filter(el => el.last_name.toLowerCase().includes(last_name.toLowerCase()));
@@ -21,11 +31,11 @@ const getUser = async(req, res, next) => {
         // } 
         if(first_name){
             let userName = response.filter(el => el.first_name.toLowerCase().includes(first_name.toLowerCase()));
-            userName.length ? res.send(userName) : res.status(400).send("User not found")
+            return userName.length ? res.send(userName) : res.status(400).send("User not found")
         }
         if(last_name){
             let lastName = response.filter(el => el.last_name.toLowerCase().includes(last_name.toLowerCase()));
-            lastName.length ? res.send(lastName) : res.status(400).send("User not found")
+            return lastName.length ? res.send(lastName) : res.status(400).send("User not found")
         }
         res.json(response)
     } catch (error) {
