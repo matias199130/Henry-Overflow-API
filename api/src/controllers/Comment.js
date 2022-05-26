@@ -28,6 +28,21 @@ const getComment = (req, res, next) => {
     
 }
 
+const addComment = async(req, res, next) => {
+    const { idPost, idUser } = req.params
+    try {
+        const createdInPost = await Post.findByPk(idPost, { include: [User] })
+        const createdBy = await User.findByPk(idUser)
+
+        const newComment = await Comment.create(req.body);
+        createdBy.addComment(newComment)
+        createdInPost.addComment(newComment)
+        res.send("Comentario enviado con exito")
+    } catch (error) {
+        next(error)
+    }
+}
+
 
 const updateComment = (req, res, next) => {
     const id = req.params.id;
@@ -53,5 +68,6 @@ const deleteComment = (req, res, next) => {
 module.exports = {
     updateComment,
     deleteComment,
-    getComment
+    getComment,
+    addComment
 }
