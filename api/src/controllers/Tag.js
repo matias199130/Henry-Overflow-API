@@ -1,4 +1,4 @@
-const { Module, Tag } = require('../db')
+const { Tag } = require('../db')
 
 
 const getAllTags = async(req, res, next) => {

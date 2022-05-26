@@ -1,4 +1,4 @@
-const { Post, Tag, User, Comment} = require('../db');
+const { User } = require('../db');
 
 const getUser = async(req, res, next) => {
     const { idUser } = req.params;

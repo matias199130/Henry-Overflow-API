@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Router } = require('express');
-const { getUser, postUser, updateUser, deleteUser } = require('../controllers/Users');
+const { getUser, postUser, updateUser } = require('../controllers/Users');
 const router = Router();
 
 

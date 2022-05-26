@@ -1,13 +1,12 @@
 require('dotenv').config();
 const { Router } = require('express');
-const { updateComment, deleteComment, getComment, addComment } = require('../controllers/Comment');
+const { updateComment, deleteComment, addComment } = require('../controllers/Comment');
 const router = Router();
-const { Comment, Post, User } = require('../db')
 
-router.put('/:id',updateComment );
-router.delete('/:id', deleteComment);
-router.get('/', getComment)
-router.get('/:id', getComment)
+router.put('/:idComment',updateComment);
+router.delete('/:idComment', deleteComment);
 router.post('/:idPost/:idUser', addComment);
+// router.get('/', getComment)
+// router.get('/:id', getComment)
 
 module.exports = router
