@@ -1,21 +1,9 @@
 require('dotenv').config();
 const { Router } = require('express');
 const router = Router();
-const { Module, Tag } = require('../db')
+const { getAllModules } = require('../controllers/Modules')
 
 
-router.get('/', async(req, res, next) => {
-    try {
-        const response = await Module.findAll({
-            include: {
-                model: Tag,
-                attributes: { exclude: ['moduleId'] }
-            }
-        })
-        res.json(response)
-    } catch (error) {
-        next(error)
-    }
-});
+router.get('/', getAllModules);
 
 module.exports = router

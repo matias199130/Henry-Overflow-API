@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const postRouter = require('./Post')
+const posts = require('./posts')
 const users = require('./users')
 const comments = require('./comments')
 const tags = require('./tags')
@@ -8,7 +8,7 @@ const modules = require('./modules')
 
 const router = Router();
 
-router.use('/post', postRouter)
+router.use('/posts', posts)
 router.use('/users', users)
 router.use('/tags', tags)
 router.use('/modules', modules)
