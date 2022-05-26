@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Router } = require('express');
-const { updateComment, deleteComment } = require('../controllers/Comment');
+const { updateComment, deleteComment, getComment } = require('../controllers/Comment');
 const router = Router();
 const { Comment, Post, User } = require('../db')
 
@@ -10,6 +10,8 @@ const { Comment, Post, User } = require('../db')
 // ID USER ---> SABER QUE USUARIO HIZO ESE COMENTARIO
 router.put('/:id',updateComment );
 router.delete('/:id', deleteComment);
+router.get('/', getComment)
+router.get('/:id', getComment)
 /* 
 Entonces extraigo el ID del post por params, y de alli saco el
 
