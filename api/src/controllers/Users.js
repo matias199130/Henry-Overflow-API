@@ -1,13 +1,13 @@
 const { Post, Tag, User, Comment} = require('../db');
 
 const getUser = async(req, res, next) => {
-    const id = req.params.id;
+    const { idUser } = req.params;
     const {first_name, last_name} = req.query;
    
     try {
         const response = await User.findAll()
-        if(id){
-            let userId = response.filter(el => el.id == id);
+        if(idUser){
+            let userId = response.filter(el => el.id == idUser);
             userId.length ? res.status(200).send(userId) : res.status(400).send("user not found")
         } 
         // if(first_name && last_name){
@@ -44,29 +44,29 @@ const postUser = async(req, res, next) => {
 }
 
 const updateUser = (req, res, next) => {
-    const id = req.params.id;
-    const {firs_name, last_name, email, password, rating, badges, isAdmin, role, twitter, github, portfolio} = req.body;
+    const { idUser } = req.params;
+    const {first_name, last_name, email, password, rating, badges, isAdmin, role, twitter, github, portfolio} = req.body;
     return User.update(
-        {firs_name, last_name, email, password, rating, badges, isAdmin, role, twitter, github, portfolio},{
-            where: {id},  raw : true 
+        {first_name, last_name, email, password, rating, badges, isAdmin, role, twitter, github, portfolio},{
+            where: {id: idUser},  raw : true 
         },
     ).then(updatedUser => res.send(updatedUser))
     .catch(error => next(error))
 }
 
-const deleteUser = (req, res, next) => {
-    const id = req. params.id;
-    return User.destroy({
-        where: {
-            id
-        }
-    }).then(() => {res.status(200).send("User deleted successfully")})
-    .catch(error => next(error))
-}
+// const deleteUser = (req, res, next) => {
+//     const id = req. params.id;
+//     return User.destroy({
+//         where: {
+//             id
+//         }
+//     }).then(() => {res.status(200).send("User deleted successfully")})
+//     .catch(error => next(error))
+// }
 
 module.exports = {
     getUser,
     postUser,
     updateUser,
-    deleteUser
+    // deleteUser
 }
