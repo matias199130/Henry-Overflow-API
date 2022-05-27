@@ -11,6 +11,10 @@ module.exports = (sequelize) => {
             primaryKey: true,
             allowNull: false,
         },
+        nick: {
+            type: DataTypes.STRING,
+            unique: true
+        },
         first_name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -19,6 +23,11 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        full_name: {
+            type: DataTypes.STRING,
+            get() {
+                return `${this.first_name} ${this.last_name}`
+        }},
         email: {
             type: DataTypes.STRING,
             allowNull: false,
