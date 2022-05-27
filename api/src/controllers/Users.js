@@ -2,7 +2,7 @@ const { User, Post, Comment } = require('../db');
 
 const getUser = async(req, res, next) => {
     const { idUser } = req.params;
-    const {first_name, last_name} = req.query;
+    const {fullname} = req.query;
    
     try {
         if(idUser){
@@ -20,22 +20,10 @@ const getUser = async(req, res, next) => {
             return userDetail ? res.status(200).send(userDetail) : res.status(400).send("user not found")
         } 
         const response = await User.findAll()
-        // if(first_name && last_name){
-        //     let userName = response.filter(el => el.first_name.toLowerCase().includes(first_name.toLowerCase()));
-        //     let userLastName = response.filter(el => el.last_name.toLowerCase().includes(last_name.toLowerCase()));
-        //     if(userName === userLastName){
-        //       userName? res.send(userName) : res.status(400).send("User not found")
-        //     }
-        //     let fullName = userName.concat(userLastName);
-        //     fullName.length ? res.send(fullName) : res.status(400).send("User not found")
-        // } 
-        if(first_name){
-            let userName = response.filter(el => el.first_name.toLowerCase().includes(first_name.toLowerCase()));
+
+        if(fullname){
+            let userName = response.filter(el => el.full_name.toLowerCase().includes(fullname.toLowerCase()));
             return userName.length ? res.send(userName) : res.status(400).send("User not found")
-        }
-        if(last_name){
-            let lastName = response.filter(el => el.last_name.toLowerCase().includes(last_name.toLowerCase()));
-            return lastName.length ? res.send(lastName) : res.status(400).send("User not found")
         }
         res.json(response)
     } catch (error) {
