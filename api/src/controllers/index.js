@@ -16,6 +16,51 @@ async function preLoad() {
       "Testing",
       "SQL",
       "Sequelize",
+      "Estructura de Datos",
+      "Algoritmo",
+      "Closures",
+      "Contexto de Ejecucion",
+      "Recursividad",
+      "Linked List",
+      "Arboles",
+      "Big O Notation",
+      "Sort",
+      "Document",
+      "Event Listeners", 
+      "Preprocesadores CSS",
+      "ECMAScript6",
+      "Bundlers",
+      "HTML",
+      "Componentes",
+      "Estados",
+      "Life Cycles",
+      "Estilos React",
+      "Routing-React",
+      "Forms",
+      "Hooks",
+      "Reducer",
+      "Actions Creators",
+      "Store",
+      "V8",
+      "CommonJS",
+      "npm",
+      "Promesas",
+      "Web Server",
+      "JSON",
+      "API",
+      "Routes-Express",
+      "Middleware",
+      "HTTP",
+      "Postman",
+      "CORS",
+      "Generator Functions",
+      "Async/Await",
+      "DBMS",
+      "Base de Datos",
+      "ORM",
+      "Modelos",
+      "CRUD",
+      "Autenticacion"      
     ];
     const promisesTags = allTags.map((elem) => Tag.create({ name: elem }));
     await Promise.all(promisesTags);
@@ -39,8 +84,17 @@ async function relationsModulesTags() {
   const tagsM1 = await Tag.findAll({
     where: {
         [Op.or]: [
-            { name: "JavaScript" }, 
-            { name: "Webpack" }
+            { name: "JavaScript" },
+            { name: "Estructura de Datos" },
+            { name: "Algoritmo" },
+            { name: "Closures" },
+            { name: "Contexto de Ejecucion" },
+            { name: "Recursividad" },
+            { name: "Linked List" },
+            { name: "Arboles" },
+            { name: "Big O Notation" },
+            { name: "Sort" },
+            { name: "JavaScript" }
         ], 
     },
   });
@@ -48,10 +102,27 @@ async function relationsModulesTags() {
     where: {
         [Op.or]: [
             { name: "AJAX" },
+            { name: "Webpack" },
             { name: "CSS" },
             { name: "DOM" },
             { name: "React" },
             { name: "Redux" },
+            { name: "Document" },
+            { name: "Event Listeners" },
+            { name: "Preprocesadores CSS" },
+            { name: "ECMAScript6" },
+            { name: "Bundlers" },
+            { name: "HTML" },
+            { name: "Componentes" },
+            { name: "Estados" },
+            { name: "Life Cycles" },
+            { name: "Estilos React" },
+            { name: "Routing-React" },
+            { name: "Forms" },
+            { name: "Hooks" },
+            { name: "Reducer" },
+            { name: "Actions Creators" },
+            { name: "Store" }
         ],
     },
   });
@@ -60,7 +131,21 @@ async function relationsModulesTags() {
         [Op.or]: [
             { name: "NodeJS" }, 
             { name: "Express" }, 
-            { name: "Testing" }
+            { name: "Testing" },
+            { name: "V8" },
+            { name: "CommonJS" },
+            { name: "npm" },
+            { name: "Promesas" },
+            { name: "Web Server" },
+            { name: "JSON" },
+            { name: "API" },
+            { name: "Routes-Express" },
+            { name: "Middleware" },
+            { name: "HTTP" },
+            { name: "Postman" },
+            { name: "CORS" },
+            { name: "Generator Functions" },
+            { name: "Async/Await" }
         ],
     },
   });
@@ -69,11 +154,16 @@ async function relationsModulesTags() {
         [Op.or]: [
             { name: "SQL" }, 
             { name: "Sequelize" }, 
-            { name: "PostgreSQL" }
+            { name: "PostgreSQL" },
+            { name: "DBMS" },
+            { name: "Base de Datos" },
+            { name: "Modelos" },
+            { name: "CRUD" },
+            { name: "Autenticacion" }
         ],
     },
   });
-  
+    
   moduleOne[0].addTag(tagsM1);
   moduleTwo[0].addTag(tagsM2);
   moduleThree[0].addTag(tagsM3);
