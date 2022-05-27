@@ -6,11 +6,13 @@
 __USERS__
 
   - GET, POST http://localhost:3001/users
+  - GET http://localhost:3001/users?fullname={input}
   - GET, PUT http://localhost:3001/users/{idUser}
 
 __POSTS__
 
   - GET http://localhost:3001/posts
+  - GET http://localhost:3001/posts?title={input}
   - POST http://localhost:3001/posts/{idUser}
   - GET, PUT, DELETE http://localhost:3001/posts/{idPost}
   
