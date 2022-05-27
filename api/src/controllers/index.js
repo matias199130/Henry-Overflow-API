@@ -159,7 +159,8 @@ async function relationsModulesTags() {
             { name: "Base de Datos" },
             { name: "Modelos" },
             { name: "CRUD" },
-            { name: "Autenticacion" }
+            { name: "Autenticacion" },
+            { name: "ORM" }
         ],
     },
   });
