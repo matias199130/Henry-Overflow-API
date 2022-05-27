@@ -1,5 +1,5 @@
 
-const { Post, Tag, User, Comment} = require('../db');
+const { Post, Tag, User, Comment, Module } = require('../db');
 
 const getPost = (req, res, next) => {
     const { idPost } = req.params;
@@ -15,6 +15,9 @@ const getPost = (req, res, next) => {
                 }
                 },
                 {
+                model: Module,
+                },
+                {
                 model: Comment,
                 include: [{model: User, attributes: ["first_name", "last_name", "id"] }],
                 attributes: {exclude: ["userId", "postId"]}
@@ -24,7 +27,7 @@ const getPost = (req, res, next) => {
                 attributes: ["first_name", "last_name", "id"],               
                 },
             ],
-            attributes: {exclude: ["userId"]}
+            attributes: {exclude: ["userId", "moduleId"]}
         }).then(post => {
             if(idPost){
                 let postId = post.filter(el => el.id == idPost);
@@ -44,7 +47,7 @@ const addPost = async (req, res, next) => {
         const { idUser } = req.params;
         const createdBy = await User.findByPk(idUser);
 
-        const {title, message, rating, tag} = req.body;
+        const {title, message, rating, tag, module} = req.body;
         const postCreated = await Post.create({
         title, message, rating
         })
@@ -53,7 +56,14 @@ const addPost = async (req, res, next) => {
                 name : tag
             }
         })
+        const section = await Module.findAll({
+            where: {
+                name : module
+            }
+        })
+        // console.log(section[0].__proto__)
         postCreated.addTag(tags);
+        section[0].addPost(postCreated);
         createdBy.addPost(postCreated)
         return res.send("Post done successfully")
     } catch (error) {
