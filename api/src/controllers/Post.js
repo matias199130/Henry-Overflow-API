@@ -61,15 +61,28 @@ const addPost = async (req, res, next) => {
     }
 }
 
-const updatePost = (req, res, next) => {
+const updatePost = async (req, res, next) => {
     const { idPost } = req.params;
     const {title, message, rating, tag} = req.body;
-    return Post.update(
-        {title, message, rating, tag},{
-            where: {id: idPost},  raw : true 
-        },
-    ).then(updatedPost => res.send(updatedPost))
-    .catch(error => next(error))
+    try {
+        const postUpdate = await Post.findByPk(idPost);
+        const allTags = await Tag.findAll({
+            where: {
+                name : tag
+            }
+        })
+        // console.log("Post", postUpdate.__proto__)
+        console.log(allTags)
+        await postUpdate.setTags(allTags)
+        const updateSuccess = await Post.update(
+            {title, message, rating },{
+                where: {id: idPost},  raw : true 
+            },
+        )
+        return updateSuccess[0] === 1 ? res.send("Post actualizado con exito!") : res.status(400).send("No se pudo actualizar el Post")
+    } catch (error) {
+        next(error)
+    }
 }
 
 const deletePost = (req, res, next) => {
