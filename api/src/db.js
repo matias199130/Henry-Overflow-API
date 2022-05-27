@@ -69,6 +69,9 @@ const {
 Post.belongsToMany(Tag, { through: "Posts_Tags" });
 Tag.belongsToMany(Post, { through: "Posts_Tags" });
 
+Module.hasMany(Post);
+Post.belongsTo(Module);
+
 User.hasMany(Post);
 Post.belongsTo(User);
 
