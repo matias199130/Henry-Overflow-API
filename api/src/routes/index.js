@@ -5,6 +5,8 @@ const users = require('./users')
 const comments = require('./comments')
 const tags = require('./tags')
 const modules = require('./modules')
+const postLikes = require('./like_posts')
+const commentLikes = require('./like_comments')
 
 const router = Router();
 
@@ -13,6 +15,8 @@ router.use('/users', users)
 router.use('/tags', tags)
 router.use('/modules', modules)
 router.use('/comments', comments)
+router.use('/post_likes', postLikes)
+router.use('/comment_likes', commentLikes)
 
 
 router.use('/', (req, res) => {
