@@ -73,14 +73,15 @@ const {
 // Foo.hasOne(Bar);
 // Bar.belongsTo(Foo);
 
-User.hasOne(Like_comment)
-Like_comment.belongsTo(User)
 
-User.hasOne(Like_post)
+User.hasMany(Like_post)
 Like_post.belongsTo(User)
 
 Post.hasMany(Like_post)
 Like_post.belongsTo(Post)
+
+User.hasOne(Like_comment)
+Like_comment.belongsTo(User)
 
 Comment.hasMany(Like_comment)
 Like_comment.belongsTo(Comment)
