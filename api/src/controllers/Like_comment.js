@@ -4,7 +4,9 @@ const updateLikeComment = async (req, res, next) => {
     const { idComment, idUser } = req.params
     try {
         const likeInComment = await Comment.findByPk(idComment)
-        const likedBy = await User.findByPk(idUser)
+        const likedBy = await User.findByPk(idUser);
+        
+        
 
         const exist = await Like_comment.findAll({
             where: {
@@ -14,6 +16,7 @@ const updateLikeComment = async (req, res, next) => {
         })
         if(!exist.length) {
             const newLike = await Like_comment.create();
+            
             likeInComment.addLike_comment(newLike)
             likedBy.addLike_comment(newLike)           
             return res.send("Like")
@@ -32,7 +35,7 @@ const getLikeComment = async (req, res, next) => {
     const { idComment } = req.params
     try {
         const likeInComment = await Comment.findByPk(idComment)
-        const countLikes = await likeInComment.countLike_comment()
+        const countLikes = await likeInComment.countLike_comments()
         res.json(countLikes)
     } catch (error) {
         next(error)

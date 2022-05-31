@@ -80,7 +80,7 @@ Like_post.belongsTo(User)
 Post.hasMany(Like_post)
 Like_post.belongsTo(Post)
 
-User.hasOne(Like_comment)
+User.hasMany(Like_comment)
 Like_comment.belongsTo(User)
 
 Comment.hasMany(Like_comment)
