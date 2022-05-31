@@ -8,7 +8,15 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
         allowNull: false,
-      }
+      },
+      userId: {
+        type: DataTypes.UUID,
+        unique: 'commentAndUser'
+      },
+      commentId: {
+        type: DataTypes.UUID,
+        unique: 'commentAndUser'
+      },
     },
     {
       timestamps: false

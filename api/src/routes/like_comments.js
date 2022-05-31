@@ -1,14 +1,10 @@
-require('dotenv').config();
 const { Router } = require('express');
-const {  } = require('../controllers/Comment');
+const { updateLikeComment, getLikeComment } = require('../controllers/Like_comment');
+
+
 const router = Router();
 
-router.post('/:idComment/:idUser', (req, res, next) => {
-    try {
-
-    } catch (error) {
-        next(error)
-    }
-});
+router.put('/:idComment/:idUser', updateLikeComment );
+router.get('/:idComment', getLikeComment);
 
 module.exports = router
