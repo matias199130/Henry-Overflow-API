@@ -33,11 +33,12 @@ const addComment = async(req, res, next) => {
     try {
         const createdInPost = await Post.findByPk(idPost, { include: [User] })
         const createdBy = await User.findByPk(idUser)
-
+        
         const newComment = await Comment.create(req.body);
         createdBy.addComment(newComment)
         createdInPost.addComment(newComment)
-        res.send("Comentario enviado con exito")
+        console.log(newComment)
+        res.send(newComment)
     } catch (error) {
         next(error)
     }
