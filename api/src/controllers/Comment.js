@@ -37,8 +37,14 @@ const addComment = async(req, res, next) => {
         const newComment = await Comment.create(req.body);
         createdBy.addComment(newComment)
         createdInPost.addComment(newComment)
-        console.log(newComment)
-        res.send(newComment)
+        const commentCreated = await Comment.findAll({
+            where: {
+                userId: idUser,
+                postId: idPost
+            },
+            include: [{model: User, attributes: ["first_name", "last_name", "id"] }]
+        })
+        res.send(commentCreated)
     } catch (error) {
         next(error)
     }
