@@ -61,11 +61,31 @@ const {
     Tag,
     User,
     Comment,
-    Module
+    Module,
+    Like_comment,
+    Like_post
 } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+
+
+// Foo.hasOne(Bar);
+// Bar.belongsTo(Foo);
+
+
+User.hasMany(Like_post)
+Like_post.belongsTo(User)
+
+Post.hasMany(Like_post)
+Like_post.belongsTo(Post)
+
+User.hasMany(Like_comment)
+Like_comment.belongsTo(User)
+
+Comment.hasMany(Like_comment)
+Like_comment.belongsTo(Comment)
+
 Post.belongsToMany(Tag, { through: "Posts_Tags" });
 Tag.belongsToMany(Post, { through: "Posts_Tags" });
 

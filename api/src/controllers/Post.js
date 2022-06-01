@@ -1,5 +1,5 @@
 
-const { Post, Tag, User, Comment, Module } = require('../db');
+const { Post, Tag, User, Comment, Module, Like_post } = require('../db');
 
 const getPost = (req, res, next) => {
     const { idPost } = req.params;
@@ -13,6 +13,13 @@ const getPost = (req, res, next) => {
                 through: {
                     attributes: []
                 }
+                },
+                {
+                model: Like_post
+                // attributes: ["name", "id"],
+                // through: {
+                //     attributes: []
+                // }
                 },
                 {
                 model: Module,
