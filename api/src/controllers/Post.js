@@ -44,7 +44,8 @@ const getPost = (req, res, next) => {
 
 const addPost = async (req, res, next) => {
     try {
-        const { idUser } = req.params;
+        // const { idUser } = req.params;
+        const idUser = req.idUser
         const createdBy = await User.findByPk(idUser);
 
         const {title, message, rating, tag, module} = req.body;

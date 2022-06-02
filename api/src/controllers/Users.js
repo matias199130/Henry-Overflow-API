@@ -1,4 +1,7 @@
 const { User, Post, Comment } = require('../db');
+const jwt = require('jsonwebtoken');
+const { isAdmin } = require('../middleware');
+require('dotenv').config()
 
 const getUser = async(req, res, next) => {
     const { idUser } = req.params;
@@ -29,28 +32,55 @@ const getUser = async(req, res, next) => {
     } catch (error) {
         next(error)
     }
-}
+};
 
 
-const postUser = async(req, res, next) => {
+const logintUser = async(req, res, next) => {
+    const { login, avatar_url, name, email } = req.body;
+    // console.log(req.body)
+    // SI AVATAR_URL ES NULL HACER UN UPDATE CON LA NUEVA INFO
+    let arrayName = name.split(" ");
+    const firstName = arrayName.shift();
+    const lastName = arrayName.join(" ");
+
+    const userLogin = {
+        nick: login,
+        image: avatar_url,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        // about: bio,
+        isAdmin: true
+    };
+
     try {
-        const newUser = await User.create(req.body);
-        res.json(newUser)
+        const [user, boolean] = await User.findOrCreate({
+            where: userLogin,
+        });
+
+        const token = jwt.sign(user.id, process.env.SECRET);
+
+        res.header('authorization', token).json({
+            message: 'User authenticate',
+            token: token,
+            isAdmin: user.isAdmin,
+            isCreated: boolean
+        });
     } catch (error) {
         next(error)
     }
-}
+};
 
 const updateUser = (req, res, next) => {
     const { idUser } = req.params;
-    const {first_name, last_name, email, password, rating, badges, isAdmin, role, twitter, github, portfolio} = req.body;
+    const {first_name, last_name, email, about, rating, badges, isAdmin, role, twitter, github, portfolio} = req.body;
     return User.update(
-        {first_name, last_name, email, password, rating, badges, isAdmin, role, twitter, github, portfolio},{
+        {first_name, last_name, email, about, rating, badges, isAdmin, role, twitter, github, portfolio},{
             where: {id: idUser},  raw : true 
         },
     ).then(updatedUser => res.send(updatedUser))
     .catch(error => next(error))
-}
+};
 
 // const deleteUser = (req, res, next) => {
 //     const id = req. params.id;
@@ -64,7 +94,7 @@ const updateUser = (req, res, next) => {
 
 module.exports = {
     getUser,
-    postUser,
+    logintUser,
     updateUser,
     // deleteUser
 }
