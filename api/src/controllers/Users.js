@@ -36,16 +36,16 @@ const getUser = async(req, res, next) => {
 
 
 const logintUser = async(req, res, next) => {
-    const { login, avatar_url, name, email } = req.body;
+    const { nickname, picture, name, email } = req.body;
     // console.log(req.body)
-    // SI AVATAR_URL ES NULL HACER UN UPDATE CON LA NUEVA INFO
+    // SI picture ES NULL HACER UN UPDATE CON LA NUEVA INFO
     let arrayName = name.split(" ");
     const firstName = arrayName.shift();
     const lastName = arrayName.join(" ");
 
     const userLogin = {
-        nick: login,
-        image: avatar_url,
+        nick: nickname,
+        image: picture,
         first_name: firstName,
         last_name: lastName,
         email: email,
@@ -57,8 +57,8 @@ const logintUser = async(req, res, next) => {
         const [user, boolean] = await User.findOrCreate({
             where: userLogin,
         });
-
         const token = jwt.sign(user.id, process.env.SECRET);
+        console.log(token)
 
         res.header('authorization', token).json({
             message: 'User authenticate',
