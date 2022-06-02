@@ -9,7 +9,11 @@ const postLikes = require("./like_posts");
 const commentLikes = require("./like_comments");
 const loginUser = require("./login");
 
+// AUTH 
+// const login = require('./loginGithub')
+
 const router = Router();
+
 
 router.use("/posts", posts);
 router.use("/users", users);
