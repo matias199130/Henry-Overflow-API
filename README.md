@@ -25,3 +25,11 @@ __TAGS & MODULES__
 
   - GET http://localhost:3001/modules
   - GET http://localhost:3001/tags
+
+__LIKES POSTS__
+  - PUT http://localhost:3001/post_likes/{idPost}/{idUser}
+  - GET http://localhost:3001/post_likes/{idPost}
+
+__LIKES COMMENTS__
+  - PUT http://localhost:3001/comment_likes/{idComment}/{idUser}
+  - GET http://localhost:3001/comment_likes/{idComment}
