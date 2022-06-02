@@ -1,5 +1,6 @@
-const { Tag, Module } = require("../db");
+const { Tag, Module, User } = require("../db");
 const { Op } = require("sequelize");
+const fs = require("fs");
 
 async function preLoad() {
   try {
@@ -94,7 +95,6 @@ async function relationsModulesTags() {
             { name: "Arboles" },
             { name: "Big O Notation" },
             { name: "Sort" },
-            { name: "JavaScript" }
         ], 
     },
   });
@@ -171,6 +171,38 @@ async function relationsModulesTags() {
   moduleFour[0].addTag(tagsM4);
 }
 
+const bulkCreateUsers = async () => {
+  try {
+    let data = fs.readFileSync(__dirname + "/../json/users.json", "utf8");
+    data = JSON.parse(data);
+    // console.log(data);
+    // let arrayName = data[0].name.split(" ");
+    // console.log(arrayName)
+    // const firstName = arrayName.shift();
+    // const lastName = arrayName.join(" ");
+    for (let i = 0; i < data.length; i++) {
+      let arrayName = data[i].name.split(" ");
+      const firstName = arrayName.shift();
+      const lastName = arrayName.join(" ");
+      // data[i].password = await bcrypt.hash(data[i].password, 8);
+      const userCreated = await User.findOrCreate({
+        where: {
+          nick: data[i].nick,
+          // image: data[i].image,
+          first_name: firstName,
+          last_name: lastName,
+          email: data[i].email,
+          isAdmin: true
+        },
+      });
+      console.log(userCreated[0].toJSON())
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   preLoad,
+  bulkCreateUsers
 };

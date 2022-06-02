@@ -28,9 +28,11 @@ const { Post, User, Comment } = require("../db");
 
 // }
 
-const addComment = async (req, res, next) => {
-  const { idPost, idUser } = req.params;
-  const obj = {};
+
+const addComment = async(req, res, next) => {
+    const { idPost } = req.params
+    const idUser = req.idUser
+    const obj = {};
 
   try {
     const createdInPost = await Post.findByPk(idPost, { include: [User] });
