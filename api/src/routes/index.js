@@ -24,8 +24,8 @@ router.use("/post_likes", postLikes);
 router.use("/comment_likes", commentLikes);
 // router.use("/login_user", loginUser);
 
-router.use("/", (req, res) => {
-  res.status(200).send({ message: "Ruta principal conectada exitosamente" });
-});
+// router.use("/", (req, res) => {
+//   res.status(200).send({ message: "Ruta principal conectada exitosamente" });
+// });
 
 module.exports = router;

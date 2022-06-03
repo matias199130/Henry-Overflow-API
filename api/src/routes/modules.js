@@ -2,9 +2,9 @@ require('dotenv').config();
 const { Router } = require('express');
 const router = Router();
 const { getAllModules } = require('../controllers/Modules')
-const { validateToken } = require('../middleware');
+// const {} = require('../middleware');
 
 
-router.get('/', validateToken, getAllModules);
+router.get('/', getAllModules);
 
 module.exports = router

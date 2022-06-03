@@ -173,29 +173,26 @@ async function relationsModulesTags() {
 
 const bulkCreateUsers = async () => {
   try {
-    let data = fs.readFileSync(__dirname + "/../json/users.json", "utf8");
+    const data = fs.readFileSync(__dirname + "/../json/users.json", "utf8");
     data = JSON.parse(data);
-    // console.log(data);
-    // let arrayName = data[0].name.split(" ");
-    // console.log(arrayName)
-    // const firstName = arrayName.shift();
-    // const lastName = arrayName.join(" ");
+
     for (let i = 0; i < data.length; i++) {
+
       let arrayName = data[i].name.split(" ");
       const firstName = arrayName.shift();
       const lastName = arrayName.join(" ");
-      // data[i].password = await bcrypt.hash(data[i].password, 8);
+
       const userCreated = await User.findOrCreate({
         where: {
-          nick: data[i].nick,
-          // image: data[i].image,
+          nick: data[i].nickname,
+          image: data[i].picture,
           first_name: firstName,
           last_name: lastName,
           email: data[i].email,
           isAdmin: true
         },
       });
-      console.log(userCreated[0].toJSON())
+      // console.log(userCreated[0].toJSON())
     }
   } catch (error) {
     console.log(error);

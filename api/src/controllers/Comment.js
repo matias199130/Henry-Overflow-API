@@ -30,8 +30,8 @@ const { Post, User, Comment } = require("../db");
 
 
 const addComment = async(req, res, next) => {
-    const { idPost } = req.params
-    const idUser = req.idUser
+    const { idPost, idUser } = req.params
+    // const idUser = req.idUser
     const obj = {};
 
   try {

@@ -1,11 +1,11 @@
 const { Router } = require('express');
 const { updateLikeComment, getLikeComment } = require('../controllers/Like_comment');
-const { validateToken } = require('../middleware');
+// const {} = require('../middleware');
 
 
 const router = Router();
 
-router.put('/:idComment', validateToken, updateLikeComment );
-router.get('/:idComment', validateToken, getLikeComment);
+router.put('/:idComment/:idUser', updateLikeComment );
+router.get('/:idComment', getLikeComment);
 
 module.exports = router
