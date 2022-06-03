@@ -50,7 +50,7 @@ const logintUser = async(req, res, next) => {
         last_name: lastName,
         email: email,
         // about: bio,
-        isAdmin: true
+        // isAdmin: true
     };
 
     try {
