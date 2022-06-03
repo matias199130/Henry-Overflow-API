@@ -13,15 +13,16 @@ module.exports = (sequelize) => {
         },
         nick: {
             type: DataTypes.STRING,
-            unique: true
+            unique: true,
+            allowNull: false
         },
         first_name: {
             type: DataTypes.STRING,
-            allowNull: false,
+            // allowNull: false,
         },
         last_name: {
             type: DataTypes.STRING,
-            allowNull: false,
+            // allowNull: false,
         },
         full_name: {
             type: DataTypes.STRING,

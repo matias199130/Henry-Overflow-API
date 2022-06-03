@@ -3,8 +3,8 @@ const { Post, User, Like_post } = require('../db');
 
 
 const updateLikePost = async (req, res, next) => {
-    const { idPost } = req.params
-    const idUser = req.idUser
+    const { idPost, idUser } = req.params
+    // const idUser = req.idUser
     try {
         const likeInPost = await Post.findByPk(idPost)
         const likedBy = await User.findByPk(idUser)

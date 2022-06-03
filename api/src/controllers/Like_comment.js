@@ -1,8 +1,8 @@
 const { Comment, User, Like_comment } = require('../db');
 
 const updateLikeComment = async (req, res, next) => {
-    const { idComment } = req.params
-    const idUser = req.idUser
+    const { idComment, idUser } = req.params
+    // const idUser = req.idUser
     try {
         const likeInComment = await Comment.findByPk(idComment)
         const likedBy = await User.findByPk(idUser);

@@ -1,7 +1,7 @@
 const { User, Post, Comment } = require('../db');
-const jwt = require('jsonwebtoken');
-const { isAdmin } = require('../middleware');
-require('dotenv').config()
+// const jwt = require('jsonwebtoken');
+// const { isAdmin } = require('../middleware');
+// require('dotenv').config()
 
 const getUser = async(req, res, next) => {
     const { idUser } = req.params;
@@ -49,25 +49,24 @@ const logintUser = async(req, res, next) => {
         first_name: firstName,
         last_name: lastName,
         email: email,
-        // about: bio,
-        isAdmin: true
+        // isAdmin: true
     };
 
     try {
         const [user, boolean] = await User.findOrCreate({
             where: userLogin,
         });
-        const token = jwt.sign(user.id, process.env.SECRET);
-        console.log(token)
+        console.log(user)
+        // const token = jwt.sign(user.id, process.env.SECRET);
+        // console.log(token)
 
-        res.header('authorization', token).json({
-            message: 'User authenticate',
-            token: token,
-            isAdmin: user.isAdmin,
+        res.json({
+            user: user,
             isCreated: boolean
         });
     } catch (error) {
-        next(error)
+        console.log(error)
+        // next(error)
     }
 };
 
