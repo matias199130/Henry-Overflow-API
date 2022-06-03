@@ -67,7 +67,8 @@ const logintUser = async(req, res, next) => {
             isCreated: boolean
         });
     } catch (error) {
-        next(error)
+        console.log(error)
+        // next(error)
     }
 };
 
