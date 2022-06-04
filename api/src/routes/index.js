@@ -7,13 +7,14 @@ const tags = require("./tags");
 const modules = require("./modules");
 const postLikes = require("./like_posts");
 const commentLikes = require("./like_comments");
+
 // const loginUser = require("./login");
+const paymentRoutes = require("./payment.routes");
 
 // AUTH 
 // const login = require('./loginGithub')
 
 const router = Router();
-
 
 router.use("/posts", posts);
 router.use("/users", users);
@@ -23,7 +24,7 @@ router.use("/comments", comments);
 router.use("/post_likes", postLikes);
 router.use("/comment_likes", commentLikes);
 // router.use("/login_user", loginUser);
-
+router.use("/payment", paymentRoutes)
 // router.use("/", (req, res) => {
 //   res.status(200).send({ message: "Ruta principal conectada exitosamente" });
 // });

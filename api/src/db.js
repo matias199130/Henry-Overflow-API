@@ -63,7 +63,9 @@ const {
     Comment,
     Module,
     Like_comment,
-    Like_post
+    Like_post,
+    Order,
+    Product
 } = sequelize.models;
 
 // Aca vendrian las relaciones
@@ -103,6 +105,9 @@ Comment.belongsTo(User);
 
 Module.hasMany(Tag);
 Tag.belongsTo(Module);
+
+User.hasMany(Order);
+Order.belongsTo(User);
 
 
 
